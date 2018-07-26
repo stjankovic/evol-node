@@ -215,16 +215,18 @@ for(var mid in models){
 }
 
 console.log(sql);
-
-if(sqlFile){
+console.log(sqlFile);
+if(!sqlFile){
     var fId = new Date().toISOString()
     fs.writeFile('evol-db-schema-'+fId+'.sql', sql, function(err){
         if (err){
+            console.log(err);
             throw err;
         }
     })
     fs.writeFile('evol-db-z-data-'+fId+'.sql', sqlData, function(err){
         if (err){
+            console.log(err);
             throw err;
         }
     })  

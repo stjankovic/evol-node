@@ -1,0 +1,191 @@
+NAME
+    gcloud config set - set a Cloud SDK property
+
+SYNOPSIS
+    gcloud config set SECTION/PROPERTY VALUE [--installation]
+        [GCLOUD_WIDE_FLAG ...]
+
+DESCRIPTION
+    gcloud config set sets the specified property in your active configuration
+    only. A property governs the behavior of a specific aspect of Cloud SDK
+    such as the service account to use or the verbosity level of logs. To set
+    the property across all configurations, use the --installation flag. For
+    more information regarding creating and using configurations, see gcloud
+    topic configurations.
+
+    To view a list of properties currently in use, run gcloud config list.
+
+    To unset properties, use gcloud config unset.
+
+    Note, Cloud SDK comes with a default configuration. To create multiple
+    configurations, use gcloud config configurations create, and gcloud config
+    configurations activate to switch between them.
+
+POSITIONAL ARGUMENTS
+     SECTION/PROPERTY
+        Property to be set. Note that SECTION/ is optional while referring to
+        properties in the core section, i.e., using either core/project or
+        project is a valid way of setting a project, while using section names
+        is essential for setting specific properties like compute/region.
+        Consult the Cloud SDK properties page for a comprehensive list of
+        properties: https://cloud.google.com/sdk/docs/properties
+
+     VALUE
+        Value to be set.
+
+FLAGS
+     --installation
+        If set, the property is updated for the entire Cloud SDK installation.
+        Otherwise, by default, the property is updated only in the currently
+        active configuration.
+
+GCLOUD WIDE FLAGS
+    These flags are available to all commands: --account, --configuration,
+    --flatten, --format, --help, --log-http, --project, --quiet, --trace-token,
+    --user-output-enabled, --verbosity. Run $ gcloud help for details.
+
+AVAILABLE PROPERTIES
+     core
+         account
+            Account gcloud should use for authentication. Run gcloud auth list
+            to see your currently available accounts.
+
+         custom_ca_certs_file
+            Absolute path to a custom CA cert file.
+
+         default_regional_backend_service
+            If True, backend services in gcloud compute backend-services will
+            be regional by default. Setting the --global flag is required for
+            global backend services.
+
+         disable_color
+            If True, color will not be used when printing messages in the
+            terminal.
+
+         disable_prompts
+            If True, the default answer will be assumed for all user prompts.
+            However, for any prompts that require user input, an error will be
+            raised. This is equivalent to either using the global --quiet flag
+            or setting the environment variable CLOUDSDK_CORE_DISABLE_PROMPTS
+            to 1. Setting this property is useful when scripting with gcloud.
+
+         disable_usage_reporting
+            If True, anonymous statistics on SDK usage will not be collected.
+            This value is set by default based on your choices during
+            installation, but can be changed at any time. For more information,
+            see: https://cloud.google.com/sdk/usage-statistics
+
+         log_http
+            If True, log HTTP requests and responses to the logs. To see logs
+            in the terminal, adjust verbosity settings. Otherwise, logs are
+            available in their respective log files.
+
+         max_log_days
+            Maximum number of days to retain log files before deleting. If set
+            to 0, turns off log garbage collection and does not delete log
+            files. If unset, the default is 30 days.
+
+         pass_credentials_to_gsutil
+            If True, pass the configured Cloud SDK authentication to gsutil.
+
+         project
+            Project ID of the Cloud Platform project to operate on by default.
+            This can be overridden by using the global --project flag.
+
+         show_structured_logs
+            Control when JSON-structured log messages for the current verbosity
+            level (and above) will be written to standard error. If this
+            property is disabled, logs are formatted as text by default.
+
+            Valid values are:
+            ì never - Log messages as text
+            ì always - Always log messages as JSON
+            ì log - Only log messages as JSON if stderr is a file
+            ì terminal - Only log messages as JSON if stderr is a terminal
+
+    If unset, default is never.
+
+         trace_token
+            Token used to route traces of service requests for investigation of
+            issues. This token will be provided by Google support.
+
+         user_output_enabled
+            True, by default. If False, messages to the user and command output
+            on both standard output and standard error will be suppressed.
+
+         verbosity
+            Default logging verbosity for gcloud commands. This is the
+            equivalent of using the global --verbosity flag. Supported
+            verbosity levels: debug, info, warning, error, and none.
+
+     app
+         cloud_build_timeout
+            Timeout, in seconds, to wait for Docker builds to complete during
+            deployments. All Docker builds now use the Cloud Build API.
+
+         promote_by_default
+            If True, when deploying a new version of a service, that version
+            will be promoted to receive all traffic for the service. This
+            property can be overridden via the --promote-by-default or
+            --no-promote-by-default flags.
+
+         stop_previous_version
+            If True, when deploying a new version of a service, the previously
+            deployed version is stopped. If False, older versions must be
+            stopped manually.
+
+         use_runtime_builders
+            If set, opt in/out to a new code path for building applications
+            using pre-fabricated runtimes that can be updated independently of
+            client tooling. If not set, the default path for each runtime is
+            used.
+
+     auth
+         disable_credentials
+            If True, gcloud will not attempt to load any credentials or
+            authenticate any requests. This is useful when behind a proxy that
+            adds authentication to requests.
+
+     billing
+         quota_project
+            Project that will be charged quota for the operations performed in
+            gcloud. When unset, the default is [CURRENT_PROJECT]; this will
+            charge quota against the currently set project for operations
+            performed on it. Additionally, some existing APIs will continue to
+            use a shared project for quota by default, when this property is
+            unset.
+
+            If you need to operate on one project, but need quota against a
+            different project, you can use this property to specify the
+            alternate project.
+
+     builds
+         timeout
+            Timeout, in seconds, to wait for builds to complete.
+
+     component_manager
+         additional_repositories
+            Comma separated list of additional repositories to check for
+            components. This property is automatically managed by the gcloud
+            components repositories commands.
+
+         disable_update_check
+            If True, Cloud SDK will not automatically check for updates.
+
+     composer
+         location
+            Composer location to use. Each Composer location constitutes an
+            independent resource namespace constrained to deploying
+            environments into Compute Engine regions inside this location. This
+            parameter corresponds to the /locations/<location> segment of the
+            Composer resource URIs being referenced.
+
+     compute
+         region
+            Default region to use when working with regional Compute Engine
+            resources. When a --region flag is required but not provided, the
+            command will fall back to this value, if set. To see valid choices,
+            run gcloud compute regions list.
+
+         use_new_list_usable_subnets_api
+            If True, 
